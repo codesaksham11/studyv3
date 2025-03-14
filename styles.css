@@ -1,0 +1,84 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.subject {
+    margin-bottom: 20px;
+}
+
+.chapters {
+    padding-left: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.flashcard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.flashcard {
+    width: 300px;
+    height: 200px;
+    position: relative;
+    perspective: 1000px;
+    margin-bottom: 20px;
+}
+
+.flashcard .front,
+.flashcard .back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: #eee;
+    font-size: 1.2em;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: auto; /* Enable scrolling for long content */
+    text-align: center;
+    transition: transform 0.8s ease-in-out;
+}
+
+.flashcard .back {
+    transform: rotateY(180deg);
+    background-color: #ffefaf;
+}
+
+.flashcard.flipped .front {
+    transform: rotateY(180deg);
+}
+
+.flashcard.flipped .back {
+    transform: rotateY(0deg);
+}
+
+.buttons button {
+    margin: 0 10px;
+}
