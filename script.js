@@ -13,17 +13,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    startButton.addEventListener('click', function() {
-        const selectedChapters = []; // Store as a simple array of strings
 
-        const chapterCheckboxes = document.querySelectorAll('.chapters input[type="checkbox"]');
-        chapterCheckboxes.forEach(checkbox => {
-            if (checkbox.checked) {
-                selectedChapters.push(checkbox.value); // Store only the chapter value
-            }
-        });
+   startButton.addEventListener('click', function() {
+    const selectedChapters = []; // Store a simple array of chapter *values*
 
-        localStorage.setItem('selectedChapters', JSON.stringify(selectedChapters));
-        window.location.href = 'flashcard.html';
+    const chapterCheckboxes = document.querySelectorAll('.chapters input[type="checkbox"]');
+    chapterCheckboxes.forEach(checkbox => {
+        if (checkbox.checked) {
+            // Store only the chapter value, NOT the subject.
+            selectedChapters.push(checkbox.value);  // This is the KEY FIX
+        }
     });
+
+    localStorage.setItem('selectedChapters', JSON.stringify(selectedChapters));
+    window.location.href = 'flashcard.html';
+});
 });
