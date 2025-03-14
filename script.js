@@ -1,33 +1,29 @@
 document.addEventListener('DOMContentLoaded', function() {
     const startButton = document.getElementById('start-button');
+    const subjects = document.querySelectorAll('.subject');
+
+    // Add click event listeners to subject titles
+    subjects.forEach(subject => {
+        const title = subject.querySelector('.subject-title');
+        const chapters = subject.querySelector('.chapters');
+
+        title.addEventListener('click', () => {
+            // Toggle the display of the chapters
+            chapters.style.display = chapters.style.display === 'none' ? 'block' : 'none';
+        });
+    });
 
     startButton.addEventListener('click', function() {
-        const selectedChapters = {};
+        const selectedChapters = []; // Store as a simple array of strings
 
-        // Get all subjects
-        const subjects = document.querySelectorAll('.subject');
-
-        subjects.forEach(subject => {
-            const subjectName = subject.id;  // "chemistry", "physics", etc.
-            selectedChapters[subjectName] = [];  // Initialize the subject with an empty array
-
-            const chapterCheckboxes = subject.querySelectorAll('input[type="checkbox"]');
-            chapterCheckboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    selectedChapters[subjectName].push(checkbox.value); // Add the chapter value
-                }
-            });
-
-            if (selectedChapters[subjectName].length === 0) {
-                delete selectedChapters[subjectName];
+        const chapterCheckboxes = document.querySelectorAll('.chapters input[type="checkbox"]');
+        chapterCheckboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                selectedChapters.push(checkbox.value); // Store only the chapter value
             }
-
         });
 
-        // Save selected chapters to localStorage
         localStorage.setItem('selectedChapters', JSON.stringify(selectedChapters));
-
-        // Redirect to the flashcard page
         window.location.href = 'flashcard.html';
     });
 });
