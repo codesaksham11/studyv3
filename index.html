@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pick Your Battle</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -8,11 +10,11 @@
     <div class="container">
         <h1>Pick Your Battle</h1>
 
-        <!-- Subjects and Chapters -->
-        <div class="subject" id="chemistry">
-            <h2>Chemistry</h2>
-            <div class="chapters">
-                <label><input type="checkbox" name="chemistry" value="atomic_structure"> Atomic Structure</label><br>
+        <div class="subjects-container">
+            <div class="subject" id="chemistry">
+                <h2 class="subject-title">Chemistry</h2>
+                <div class="chapters" style="display: none;">
+                     <label><input type="checkbox" name="chemistry" value="atomic_structure"> Atomic Structure</label><br>
                 <label><input type="checkbox" name="chemistry" value="classification_of_elements"> Classification of Elements</label><br>
                 <label><input type="checkbox" name="chemistry" value="chemical_bonding_and_shape"> Chemical Bonding and Shape</label><br>
                 <!-- More Chemistry chapters -->
@@ -40,14 +42,13 @@
                 <label><input type="checkbox" name="chemistry" value="manufacturing_of_chemicals"> Manufacturing of Chemicals</label><br>
                 <label><input type="checkbox" name="chemistry" value="fertilizer"> Fertilizer</label><br>
                 <label><input type="checkbox" name="chemistry" value="foreign_element"> Foreign Element</label><br>
-
+                </div>
             </div>
-        </div>
 
-        <div class="subject" id="physics">
-            <h2>Physics</h2>
-            <div class="chapters">
-                <label><input type="checkbox" name="physics" value="kinematics"> Kinematics</label><br>
+            <div class="subject" id="physics">
+                <h2 class="subject-title">Physics</h2>
+                <div class="chapters" style="display: none;">
+<label><input type="checkbox" name="physics" value="kinematics"> Kinematics</label><br>
                 <label><input type="checkbox" name="physics" value="dynamics"> Dynamics</label><br>
                 <label><input type="checkbox" name="physics" value="work_energy_and_power"> Work Energy and Power</label><br>
                 <label><input type="checkbox" name="physics" value="circular_motion"> Circular Motion</label><br>
@@ -71,28 +72,28 @@
                 <label><input type="checkbox" name="physics" value="direct_current_dc"> Direct Current (DC)</label><br>
                 <label><input type="checkbox" name="physics" value="solids"> Solids</label><br>
                 <label><input type="checkbox" name="physics" value="recent_trend_in_physics"> Recent Trend in Physics</label><br>
+                </div>
             </div>
-        </div>
 
-        <div class="subject" id="nepali">
-            <h2>Nepali</h2>
-            <div class="chapters">
-                <label><input type="checkbox" name="nepali" value="author"> Author</label><br>
+            <div class="subject" id="nepali">
+                <h2 class="subject-title">Nepali</h2>
+                <div class="chapters" style="display: none;">
+ <label><input type="checkbox" name="nepali" value="author"> Author</label><br>
+                </div>
             </div>
-        </div>
 
-        <div class="subject" id="english">
-            <h2>English</h2>
-            <div class="chapters">
-                <label><input type="checkbox" name="english" value="authors"> Authors</label><br>
+            <div class="subject" id="english">
+                <h2 class="subject-title">English</h2>
+                <div class="chapters" style="display: none;">
+ <label><input type="checkbox" name="english" value="authors"> Authors</label><br>
                 <label><input type="checkbox" name="english" value="word_meaning"> Word Meaning</label><br>
+                </div>
             </div>
-        </div>
 
-        <div class="subject" id="math">
-            <h2>Math</h2>
-            <div class="chapters">
-                <label><input type="checkbox" name="math" value="logic_and_set"> Logic and Set</label><br>
+            <div class="subject" id="math">
+                <h2 class="subject-title">Math</h2>
+                <div class="chapters" style="display: none;">
+ <label><input type="checkbox" name="math" value="logic_and_set"> Logic and Set</label><br>
                 <label><input type="checkbox" name="math" value="real_number"> Real Number</label><br>
                 <label><input type="checkbox" name="math" value="function"> Function</label><br>
                 <label><input type="checkbox" name="math" value="curve_sketching"> Curve Sketching</label><br>
@@ -112,13 +113,13 @@
                 <label><input type="checkbox" name="math" value="numerical_integration"> Numerical Integration</label><br>
                 <label><input type="checkbox" name="math" value="statistics"> Statistics</label><br>
                 <label><input type="checkbox" name="math" value="dynamic"> Dynamic</label><br>
+                </div>
             </div>
-        </div>
 
-        <div class="subject" id="biology">
-            <h2>Biology</h2>
-            <div class="chapters">
-                <label><input type="checkbox" name="biology" value="bio_molecules"> Bio Molecules</label><br>
+            <div class="subject" id="biology">
+                <h2 class="subject-title">Biology</h2>
+                <div class="chapters" style="display: none;">
+ <label><input type="checkbox" name="biology" value="bio_molecules"> Bio Molecules</label><br>
                 <label><input type="checkbox" name="biology" value="cell"> Cell</label><br>
                 <label><input type="checkbox" name="biology" value="fungi"> Fungi</label><br>
                 <label><input type="checkbox" name="biology" value="lichen"> Lichen</label><br>
@@ -146,8 +147,10 @@
                 <label><input type="checkbox" name="biology" value="environmental_pollution"> Environmental Pollution</label><br>
                 <label><input type="checkbox" name="biology" value="conservativation_biology"> Conservativation Biology</label><br>
                 <label><input type="checkbox" name="biology" value="wildlife"> Wildlife</label><br>
+                </div>
             </div>
         </div>
+
         <button id="start-button">Start</button>
     </div>
 
