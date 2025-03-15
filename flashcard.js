@@ -5,62 +5,58 @@ document.addEventListener('DOMContentLoaded', function() {
     const backButton = document.getElementById('back-button');
     const flipButton = document.getElementById('flip-button');
     const nextButton = document.getElementById('next-button');
+    const resetButton = document.getElementById('reset-button'); // Get Reset Button
 
-    let flashcards = [];  // Array to hold our loaded flashcards
+    let flashcards = [];
     let currentCardIndex = 0;
     let isFlipped = false;
 
-    // Load selected chapters from localStorage
-    const selectedChapters = JSON.parse(localStorage.getItem('selectedChapters')) || []; // Now it's a simple array
+    const selectedChapters = JSON.parse(localStorage.getItem('selectedChapters')) || [];
 
-    // Function to load flashcards from selected chapters
     async function loadFlashcards() {
         if (selectedChapters.length === 0) {
-            frontDiv.textContent = "No chapters selected!"; // Message if no chapters were selected
+            frontDiv.textContent = "No chapters selected!";
             backDiv.textContent = "No chapters selected!";
-            return; // Exit early if no chapters
+            return;
         }
 
-        let loadedCardsCount = 0; // Track if any cards were loaded
+        let loadedCardsCount = 0;
 
         for (const chapter of selectedChapters) {
             try {
-                // **VERY IMPORTANT LINE - MAKE SURE YOUR CODE LOOKS EXACTLY LIKE THIS:**
-                const module = await import(`./data/${chapter}.js`);  // Flat file path - CORRECT!
-
+                const module = await import(`./data/${chapter}.js`);
                 if (module.default && Array.isArray(module.default) && module.default.length > 0) {
-                    flashcards = flashcards.concat(module.default);  // Add the chapter's flashcards to the main array
-                    loadedCardsCount += module.default.length; // Increment loaded card count
+                    flashcards = flashcards.concat(module.default);
+                    loadedCardsCount += module.default.length;
                 } else {
-                    console.warn(`No flashcards found in data/${chapter}.js or invalid format.`);
+                    console.warn(`No flashcards in data/${chapter}.js or invalid format.`);
                 }
             } catch (error) {
-                console.error(`Failed to load flashcards for data/${chapter}.js:`, error);
-                console.warn(`Make sure data/${chapter}.js exists and is correctly formatted.`); // User-friendly warning
+                console.error(`Error loading data/${chapter}.js:`, error);
+                console.warn(`Check if data/${chapter}.js exists and is correct.`);
             }
         }
 
         if (loadedCardsCount === 0) {
-            frontDiv.textContent = "You are all set for today!"; // "You are all set..." message if no cards loaded
+            frontDiv.textContent = "You are all set for today!";
             backDiv.textContent = "You are all set for today!";
         } else {
-            displayFlashcard(); // Initial display only if flashcards were loaded
+            displayFlashcard();
         }
     }
 
     function displayFlashcard() {
         if (flashcards.length === 0) {
-            frontDiv.textContent = "No flashcards available."; // Fallback if flashcards array is somehow empty here
+            frontDiv.textContent = "No flashcards available.";
             backDiv.textContent = "No flashcards available.";
             return;
         }
 
         const card = flashcards[currentCardIndex];
-
-        frontDiv.innerHTML = card.front; // Support HTML content (text, images)
+        frontDiv.innerHTML = card.front;
         backDiv.innerHTML = card.back;
         isFlipped = false;
-        flashcardDiv.classList.remove('flipped');  // Ensure card starts unflipped
+        flashcardDiv.classList.remove('flipped');
     }
 
     flipButton.addEventListener('click', function() {
@@ -69,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     nextButton.addEventListener('click', function() {
-        currentCardIndex = (currentCardIndex + 1) % flashcards.length;  // Cycle through cards
+        currentCardIndex = (currentCardIndex + 1) % flashcards.length;
         displayFlashcard();
     });
 
@@ -77,6 +73,10 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = 'index.html';
     });
 
-    // Load flashcards when the page loads
+    resetButton.addEventListener('click', function() { // Reset Button Functionality
+        currentCardIndex = 0; // Go back to the first card
+        displayFlashcard();   // Display the first card
+    });
+
     loadFlashcards();
 });
