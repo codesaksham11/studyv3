@@ -1,10 +1,10 @@
-/* General Styles */
+/* General Styles (No major changes here) */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* More modern font */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(to bottom, #b2e1ff, #ffffff); /* Gradient background */
-    color: #333; /* Darker text for better readability */
+    background: linear-gradient(to bottom, #b2e1ff, #ffffff);
+    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,100 +12,102 @@ body {
 }
 
 .container {
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
-    border-radius: 15px; /* More rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Softer shadow */
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    width: 90%; /* Responsive width */
-    max-width: 600px; /* Limit maximum width */
+    width: 90%;
+    max-width: 600px;
     text-align: center;
 }
 
 h1 {
-    color: #004d66; /* Darker shade of teal */
-    margin-bottom: 30px; /* More space below the heading */
+    color: #004d66;
+    margin-bottom: 30px;
     font-size: 2.5em;
 }
 
-.subjects-container{
+/* Flashcard Container and Card Styles (IMPORTANT FLIPPING STYLES HERE!) */
+.flashcard-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* height: 100vh;  No need to fix height here */
 }
 
-.subject {
-    margin-bottom: 15px;
-    border: 2px solid #008080; /* Teal border */
+.flashcard {
+    width: 300px;
+    height: 200px;
+    position: relative; /* Needed for absolute positioning of front/back */
+    perspective: 1000px; /*  Important for 3D effect */
+    margin-bottom: 20px;
+    transition: transform 0.8s ease-in-out; /* Smooth flip transition */
+    transform-style: preserve-3d; /*  Important for 3D effect */
+}
+
+.flashcard.flipped {
+    transform: rotateY(180deg); /* Rotates the whole card */
+}
+
+.flashcard .front,
+.flashcard .back {
+    position: absolute; /*  Essential for layering front and back */
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Hides back face when rotated */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 10px;
-    overflow: hidden; /* Hide overflowing content */
-    background-color: white;
-}
-
-.subject-title {
-    background-color: #008080; /* Teal background */
-    color: white;
-    padding: 10px;
-    margin: 0;
-    cursor: pointer; /* Indicate it's clickable */
-    border-radius: 8px 8px 0 0;
-}
-
-.subject-title:hover{
-   background-color:  #006666
-}
-
-.chapters {
-    padding: 10px;
-    text-align: left;
-}
-
-.chapters label {
-    display: block;
-    margin-bottom: 5px;
-    color: #444;
-    font-size: 0.95em;  /* Slightly larger font size for labels */
-}
-
-.chapters input[type="checkbox"] {
-    margin-right: 8px;
-    transform: scale(1.2);
-}
-
-
-
-#start-button {
-    background-color: #ff6b6b; /* Coral color */
-    color: white;
-    padding: 12px 24px; /* Larger padding */
-    border: none;
-    border-radius: 25px; /* Pill-shaped button */
-    cursor: pointer;
+    background-color: #eee;
     font-size: 1.2em;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Add a subtle shadow */
-
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: auto; /* Scroll for long content */
+    text-align: center;
 }
 
-#start-button:hover {
-    background-color: #e65c5c; /* Darker shade on hover */
+.flashcard .back {
+    transform: rotateY(180deg); /* Initially rotate back face to hide it */
+    background-color: #ffefaf; /* Different back color */
+}
+
+/* Buttons Styling (Basic - we can improve this later) */
+.buttons button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em; /* Keep button font size reasonable */
+}
+
+.buttons button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
 }
 
 
-/* Media Query for Smaller Screens */
+/* Media Query for Smaller Screens (Basic - adjust as needed) */
 @media (max-width: 768px) {
     .container {
         padding: 15px;
     }
 
     h1 {
-        font-size: 2em;  /* Reduce font size slightly for smaller screens */
+        font-size: 2em;
     }
 
-    .subject-title {
-        font-size: 1em;
+    .flashcard {
+        width: 90%; /* Flashcard width on smaller screens */
+        max-width: 300px; /* Max width for smaller screens */
     }
-    #start-button {
-        font-size: 1em;
-        padding: 10px 20px;
+
+    .buttons button {
+        font-size: 0.9em; /* Slightly smaller button text on mobile */
+        padding: 8px 16px; /* Slightly smaller button padding on mobile */
+        margin: 5px; /* Reduce button margin on mobile */
     }
 }
