@@ -1,62 +1,23 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const flashcardDiv = document.getElementById('flashcard');
-    const frontDiv = document.querySelector('.front');
-    const backDiv = document.querySelector('.back');
-    const backButton = document.getElementById('back-button');
-    const flipButton = document.getElementById('flip-button');
-    const nextButton = document.getElementById('next-button');
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flashcards</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="flashcard-container">
+        <div id="flashcard" class="flashcard">
+            <div class="front"></div>
+            <div class="back"></div>
+        </div>
+        <div class="buttons">
+            <button id="back-button">Back</button>
+            <button id="flip-button">Flip</button>
+            <button id="next-button">Next</button>
+        </div>
+    </div>
 
-    let flashcards = [];  // Array to hold our loaded flashcards
-    let currentCardIndex = 0;
-    let isFlipped = false;
-
-    // Load selected chapters from localStorage
-    const selectedChapters = JSON.parse(localStorage.getItem('selectedChapters')) || {};
-
-    // Function to load flashcards from selected chapters
-    async function loadFlashcards() {
-        for (const subject in selectedChapters) {
-            for (const chapter of selectedChapters[subject]) {
-                try {
-                    const module = await import(`./data/${subject}/${chapter}.js`);  // Dynamic import
-                    flashcards = flashcards.concat(module.default);  // Add the chapter's flashcards to the main array
-                } catch (error) {
-                    console.error(`Failed to load flashcards for ${subject}/${chapter}.js:`, error);
-                }
-            }
-        }
-        displayFlashcard(); // Initial display
-    }
-
-    function displayFlashcard() {
-        if (flashcards.length === 0) {
-            frontDiv.textContent = "No flashcards selected!";
-            backDiv.textContent = "No flashcards selected!";
-            return;
-        }
-
-        const card = flashcards[currentCardIndex];
-
-        frontDiv.innerHTML = card.front; // Support HTML content (text, images)
-        backDiv.innerHTML = card.back;
-        isFlipped = false;
-        flashcardDiv.classList.remove('flipped');  // Ensure card starts unflipped
-    }
-
-    flipButton.addEventListener('click', function() {
-        flashcardDiv.classList.toggle('flipped');
-        isFlipped = !isFlipped;
-    });
-
-    nextButton.addEventListener('click', function() {
-        currentCardIndex = (currentCardIndex + 1) % flashcards.length;  // Cycle through cards
-        displayFlashcard();
-    });
-
-    backButton.addEventListener('click', function() {
-        window.location.href = 'index.html';
-    });
-
-    // Load flashcards when the page loads
-    loadFlashcards();
-});
+    <!-- IMPORTANT: Added cache-busting query parameter "?v=1" -->
+    <script src="flashcard.js?v=1"></script>
+</body>
+</html>
